@@ -1,6 +1,8 @@
-/home/youseef/GP/zerocap/zero-shot-image-to-text/clip_checkpointsmodel/__pycache/*
+/home/youseef/GP/zerocap/zero-shot-image-to-text/clip_checkpoints/ViT-B-32.pt
 model/__pycache__/ZeroCLIP.cpython-38.pyc
 model/__pycache__/ZeroCLIP_batched.cpython-38.pyc
 model/__pycache__/ZeroPik.cpython-38.pyc
 model/__pycache__/__init__.cpython-38.pyc
 .idea
+clip_checkpoints/*
+__pycache__/*
