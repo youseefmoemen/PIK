@@ -31,9 +31,9 @@ class CLIPTextGenerator:
                  lm_model='gpt-neo',
                  forbidden_tokens_file_path='./forbidden_tokens.npy',
                  clip_checkpoints='./clip_checkpoints',
-                 target_seq_length=3,
+                 target_seq_length=5,
                  reset_context_delta=True,
-                 num_iterations=3,
+                 num_iterations=30,
                  clip_loss_temperature=0.01,
                  clip_scale=1.,
                  ce_scale=0.2,
@@ -100,7 +100,21 @@ class CLIPTextGenerator:
         # print(len(clip_imgs), clip_imgs[0].shape)
         print(frames.shape)
         with torch.no_grad():
+            print(frames.shape)
             video_feats = self.clip.encode_image(frames)
+            print('ZEROPIK.py105:', video_feats.shape)
+            # image_features = sum(video_feats) # I Don't know why we sum
+
+            image_features = video_feats / video_feats.norm(dim=-1, keepdim=True)
+            return image_features.detach()
+
+    def get_img_feature_batched(self, batch):
+        # clip_imgs = [self.clip_preprocess(frame).unsqueeze(0).to(self.device) for frame in batch]
+        # print(len(clip_imgs), clip_imgs[0].shape)
+        print(batch.shape)
+        with torch.no_grad():
+            video_feats = self.clip.encode_image(batch)
+            print('ZeroPIK116:', video_feats.shape)
             # image_features = sum(video_feats) # I Don't know why we sum
 
             image_features = video_feats / video_feats.norm(dim=-1, keepdim=True)
