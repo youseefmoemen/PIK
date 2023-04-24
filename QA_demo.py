@@ -19,6 +19,6 @@ params = {
 }
 
 response = openai.Completion.create(**params)
-summary = response.choices[0].text.strip()
+answer = response.choices[0].text.strip()
 
-print(summary)
+print(answer)
